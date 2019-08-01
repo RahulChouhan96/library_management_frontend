@@ -1,0 +1,42 @@
+<section class="search-sec mine">
+    <div class="container">
+        <form action="#" method="post" novalidate="novalidate">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                            <form autocomplete="off">
+                                <input type="text" name="title" class="form-control search-slt"
+                                    (keyup)="giveTitleSuggestions()" [(ngModel)]="obj.titleKeyword"
+                                    list="titleSuggestions" autocomplete="false" placeholder="Enter Title">
+                                <datalist id="titleSuggestions">
+                                    <option *ngFor="let titleSuggestion of titleSuggestions;" [value]="titleSuggestion">
+                                </datalist>
+                            </form>
+
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                            <input type="text" name="author" class="form-control search-slt"
+                                (keyup)="giveAuthorSuggestions()" [(ngModel)]="obj.authorKeyword"
+                                list="authorSuggestions" placeholder="Enter Author">
+                            <datalist id="authorSuggestions">
+                                <option *ngFor="let authorSuggestion of authorSuggestions;" [value]="authorSuggestion">
+                            </datalist>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                            <select class="form-control search-slt" id="exampleFormControlSelect1" name="category" [(ngModel)]="obj.category">
+                                <option>Subject Category</option>
+                                <option>Science</option>
+                                <option>Mathematics</option>
+                                <option>Literature</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                            <button type="button" class="btn btn-danger wrn-btn" (click)="search()">Search</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
