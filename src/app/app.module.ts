@@ -6,11 +6,15 @@ import { AppComponent } from './app.component';
 import { FrontPageComponent } from './components/member/front-page/front-page.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
+import { IssuedBooksComponent } from './components/member/issued-books/issued-books.component';
+import { BooksIssuedComponent } from './components/librarian/books-issued/books-issued.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    FrontPageComponent
+    FrontPageComponent,
+    IssuedBooksComponent,
+    BooksIssuedComponent
   ],
   imports: [
     BrowserModule,

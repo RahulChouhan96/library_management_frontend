@@ -11,6 +11,13 @@ export class FrontPageComponent implements OnInit {
   // categoryArray: ["Science", "Mathematics", "Literature"];
   titleSuggestions = [];
   authorSuggestions = [];
+  booksByTitle: [];
+  booksByAuthor: [];
+  booksByCategory: [];
+  allBooksByAllCategory: [[]];
+  searchItForTitle: Boolean = false;
+  searchItForAuthor: Boolean = false;
+  searchItForCategory: Boolean = false;
   obj = {
     titleKeyword: "",
     authorKeyword: "",
@@ -31,6 +38,7 @@ export class FrontPageComponent implements OnInit {
           res.response.forEach(index => {
             this.titleSuggestions.push(index.title);
           });
+          this.booksByTitle = res.response;
         },
         err => {
           console.log("Error while searching for suggestions", err);
@@ -48,6 +56,7 @@ export class FrontPageComponent implements OnInit {
           res.response.forEach(index => {
             this.authorSuggestions.push(index.author);
           });
+          this.booksByAuthor = res.response;
         },
         err => {
           console.log("Error while searching for suggestions", err);
@@ -55,7 +64,46 @@ export class FrontPageComponent implements OnInit {
       )
   }
 
-  search() {
 
+  booksByOneCategory() {
+    let obj = {
+      category: this.obj.category
+    };
+    this.memberSrv.booksByOneCategory(obj)
+      .subscribe(
+        res => {
+          console.log(res);
+          this.booksByCategory = res.response;
+        },
+        err => {
+          console.log(err);
+        }
+      )
   }
+
+  search() {
+    if (this.obj.titleKeyword)
+      this.searchItForTitle = true;
+
+    if (this.obj.authorKeyword)
+      this.searchItForAuthor = true;
+
+    if (this.obj.category)
+      this.searchItForCategory = true;
+    this.booksByOneCategory();
+  }
+
+  getAllBooksByCategories() {
+    this.memberSrv.getAllBooksByCategories()
+      .subscribe(
+        res => {
+          console.log(res);
+          this.allBooksByAllCategory = res.response;
+        },
+        err => {
+          console.log(err);
+        }
+      )
+  }
+
 }
